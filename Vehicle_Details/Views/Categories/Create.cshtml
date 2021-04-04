@@ -1,6 +1,13 @@
 ﻿@model Vehicle_Details.Models.Category
 
+
 @{
+    var choice = @Context.Request.Query["Icon"];
+    var imagePath = "";
+    if (!String.IsNullOrEmpty(choice))
+    {
+        imagePath = "images/" + choice;
+    }
     ViewData["Title"] = "Create";
 }
 
@@ -8,7 +15,7 @@
 
 <h4>Category</h4>
 <hr />
-@*<div class="row">
+<div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -22,20 +29,17 @@
                 <input asp-for="MaxValue" class="form-control" />
                 <span asp-validation-for="MaxValue" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-            <label asp-for="Icon" class="control-label"></label>
-            <div>
-                <div class="custom-file">
-                    <input asp-for="Icon" class="form-control custom-file-input" />
-                    <label class="custom-file-label">Choose File..</label>
-                </div>
+                <label asp-for="Icon" class="control-label"></label>
+                @*<input asp-for="Icon" placeholder="Here Post Image link" class="form-control" />*@
+                <select asp-for="Icon" name="Icon" class="form-control">
+                    <option value="large.png">Large Vehicle</option>
+                    <option value="medium.png">Medium Vehicle</option>
+
+                </select>
+                <span asp-validation-for="Icon" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Icon" class="control-label"></label>
-            <input asp-for="Icon" class="form-control" />
-            <span asp-validation-for="Icon" class="text-danger"></span>
-        </div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
                 <input asp-for="Type" class="form-control" />
@@ -44,10 +48,12 @@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
+
         </form>
     </div>
 </div>
-*@
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

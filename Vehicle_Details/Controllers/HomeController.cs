@@ -15,26 +15,42 @@ namespace Vehicle_Details.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        /*private readonly ICategoryRepository _categoryRepositry;*/
         private readonly IHostEnvironment hostEnvironment;
 
         public HomeController(ILogger<HomeController> logger,
+            /*ICategoryRepository categoryRepository,*/
             IHostEnvironment hostEnvironment)
         {
             _logger = logger;
+            /*_categoryRepositry = categoryRepository;*/
             this.hostEnvironment = hostEnvironment;
         }
+
+       /* public ViewResult Index()
+        {
+            var model = _categoryRepository.GetAllCategory();
+            return View(model);
+        }*/
 
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+       
+        [HttpPost]
         public IActionResult Create(CategoryCreateViewModel model)
         {
-            if(!ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 string uniqueFileName = null;
-                if(model.ImageIcon != null)
+                if (model.ImageIcon != null)
                 {
                     string uploadsFolder = Path.Combine(hostEnvironment.ContentRootPath, "images");
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageIcon.FileName;
@@ -48,6 +64,8 @@ namespace Vehicle_Details.Controllers
                     Icon = uniqueFileName,
                     Type = model.Type
                 };
+                /*_categoryRepository.Add(newCategory);*/
+                return RedirectToAction(nameof(Index));
             }
             return View();
         }

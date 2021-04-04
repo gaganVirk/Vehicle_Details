@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,10 +17,10 @@ namespace Vehicle_Details.Models
         [Required]
         public int MaxValue { get; set; }
 
-        [Required]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$")]
+        /*[RegularExpression(@"^[A-Z]+[/]+[a-zA-Z0-9""'\s-]*$")]*/
         [StringLength(50)]
         public string Icon { get; set; }
+
         [Required]
         [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$")]
         [StringLength(20)]
@@ -31,10 +33,7 @@ namespace Vehicle_Details.Models
             }
             set
             {
-                if(IsInsideRange())
-                {
-                    type = value;
-                }
+               type = value;
             }
         }
 
@@ -47,10 +46,9 @@ namespace Vehicle_Details.Models
             return (this.MinValue.CompareTo(value) <= 0) && (value.CompareTo(this.MaxValue) <= 0);
         }
 
-        public bool IsInsideRange()
+        public bool IsInsideRange(Category category)
         {
-            Category range = new Category();
-            return this.IsValid() && range.IsValid() && range.ContainsValue(this.MinValue) && range.ContainsValue(this.MaxValue);
+            return this.IsValid() &&  category.IsValid() && category.ContainsValue(this.MinValue) && category.ContainsValue(this.MaxValue);
         }
 
 

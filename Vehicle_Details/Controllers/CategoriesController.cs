@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Vehicle_Details.Data;
@@ -50,25 +48,8 @@ namespace Vehicle_Details.Controllers
         }
 
         // GET: Categories/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create()//Category model, IFormFile formFile)
-        {
-            /*if (!ModelState.IsValid)
-            {
-                string uniqueFileName = null;
-                if (model.Icon != null)
-                {
-                    string uploadsFolder = Path.Combine(hostEnvironment.ContentRootPath, "images");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + formFile.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    formFile.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
-
-                model.Icon = uniqueFileName;
-                   
-             
-            }*/
+        public IActionResult Create()
+        { 
             return View();
         }
 
@@ -77,7 +58,7 @@ namespace Vehicle_Details.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MinValue,MaxValue,Icon,Type")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,MinValue,MaxValue,Icon,Type")] Category category, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
