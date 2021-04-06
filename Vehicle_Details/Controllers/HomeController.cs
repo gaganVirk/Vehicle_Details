@@ -36,8 +36,7 @@ namespace Vehicle_Details.Controllers
         public IActionResult Index()
         {
             MainPageViewModel mainPageViewModel = new MainPageViewModel();
-            mainPageViewModel.VehicleRegistrations;
-            mainPageViewModel.Categories = mainPageViewModel.Categories.
+           
             return View(mainPageViewModel);
         }
 

@@ -27,6 +27,8 @@ namespace Vehicle_Details.Models
         [Column(TypeName = "decimal(18, 2)")]
         [RegularExpression(@"^\d+\.?\d{0,2}$")]
         public decimal Weight { get; set; }
+        public Category Category { get; set; }
 
+        public int CategoryId { get; set; }
     }
 }

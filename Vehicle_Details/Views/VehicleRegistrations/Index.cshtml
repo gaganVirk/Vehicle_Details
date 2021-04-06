@@ -22,7 +22,8 @@
                         @Html.DisplayNameFor(model => model.Year)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Weight)
+                        Icon
+                       @Html.DisplayNameFor(model => model.Category.Icon)
                     </th>
                     <th></th>
                 </tr>
@@ -41,7 +42,9 @@
                             @Html.DisplayFor(modelItem => item.Year)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Weight)
+                            <img src="@Url.Content("~/images/"+item.Category.Icon)" alt="Image" />
+
+                            @*@Html.DisplayFor(modelItem => item.Weight)*@
 
                         </td>
                         <td>

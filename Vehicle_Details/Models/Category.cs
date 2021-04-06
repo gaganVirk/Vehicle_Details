@@ -24,18 +24,7 @@ namespace Vehicle_Details.Models
         [Required]
         [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$")]
         [StringLength(20)]
-        private string type;
-        public string Type
-        {
-            get
-            {
-                return type;
-            }
-            set
-            {
-               type = value;
-            }
-        }
+        public string Type { get; set; }
 
         public bool IsValid()
         {
